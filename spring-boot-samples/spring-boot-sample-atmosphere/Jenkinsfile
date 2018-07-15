@@ -1,0 +1,34 @@
+node {
+
+def project_path = 'spring-boot-samples/spring-boot-sample-atmosphere'
+
+    dir (project_path)  {
+
+        stage('compile, test and package') {
+
+            sh 'mvn clean package'
+ 
+                    }
+ 
+        stage('Archive and junit') {
+            
+            junit '**//*target/surefire-reports/TEST-*.xml'
+
+            archiveArtifacts 'target*//*.jar'
+
+                        }
+
+            }
+
+}
+
+def notify(status){
+    emailext (
+      to: "meetmadhuripotu@gmail.com",
+      subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at 
+        <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
+    )
+}
+
