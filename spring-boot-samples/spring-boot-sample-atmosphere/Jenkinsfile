@@ -1,5 +1,12 @@
-node {
 
+node {
+    notify ('started')
+
+   // stage('checkout') {
+
+                git 'https://github.com/MadhuriPotu/jenkins.git'
+
+                    }//
 def project_path = 'spring-boot-samples/spring-boot-sample-atmosphere'
 
     dir (project_path)  {
@@ -31,4 +38,3 @@ def notify(status){
         <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
     )
 }
-
