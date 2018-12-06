@@ -1,0 +1,32 @@
+pipeline {
+
+   agent any
+
+      stages {
+
+         stage('Clone Repostory')  {
+
+	        steps {
+
+	           checkout scm
+	      
+	           echo "Madhuri"
+
+	             }
+	       }
+
+	     stage('Build') {
+	  
+	        steps  {
+
+	            sh 'mvn compile'
+               
+	            echo "compilation done"
+
+	              }
+            
+            }
+
+        }
+  
+  }
